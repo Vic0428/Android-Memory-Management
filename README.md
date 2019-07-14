@@ -595,11 +595,11 @@ Then we can use `./VATranslate #pid #VA` to get physical address of given virtua
 
 The output is shown as follows:
 
-![](report.assets/Screenshot from 2019-06-15 23-11-51.png) 
+![](README.assets/Screenshot from 2019-06-15 23-11-51.png) 
 
 We display virtual memory address range for given process in kernel info:
 
-![](report.assets/Screenshot from 2019-06-15 23-12-58.png)
+![](README.assets/Screenshot from 2019-06-15 23-11-51-1563080341363.png)
 
 ### Problem 3 Investigate Android Process Address Space
 
@@ -786,27 +786,27 @@ First, we need to insert the module and we can use `vm_inspector #pid #begin_vad
 
 In this problem, we dump the page table for process `zygote` and process `calculator`. And we can use `ps | grep zygote` and `ps | grep calculator` command to find the process id of given process. 
 
-![](report.assets/Screenshot from 2019-06-15 23-36-55.png)
+![](README.assets/Screenshot from 2019-06-15 23-36-55.png)
 
-![](report.assets/Screenshot from 2019-06-16 00-00-45.png)
+![](README.assets/Screenshot from 2019-06-16 00-00-45.png)
 
 From the above output, we find the process id of `zygote` is 95 and the process id of `calculator` is 1537. 
 
 Next, we use command `cat /proc/95/maps` and `cat /proc/1537/maps` to get the memory maps. 
 
 The memory maps for `zygote`:
-![](report.assets/Screenshot from 2019-06-16 00-02-58.png)
+![](README.assets/Screenshot from 2019-06-16 00-02-58.png)
 
 The memory maps for `calculator`:
-![](report.assets/Screenshot from 2019-06-16 00-02-13.png)
+![](README.assets/Screenshot from 2019-06-16 00-02-13.png)
 
 We can find in this part there multiple shared objects since the path of shared objects is the same. `/system/lib/libutils.so` is one example of shared objects. 
 
 And we use the `vm_inspector` to verify that the underlying physical address of this two range of virtual address is the same. 
 
-![Screenshot from 2019-06-16 00-05-47](report.assets/Screenshot from 2019-06-16 00-05-47.png)
+![Screenshot from 2019-06-16 00-05-47](README.assets/Screenshot from 2019-06-16 00-05-47.png)
 
-![Screenshot from 2019-06-16 00-06-14](report.assets/Screenshot from 2019-06-16 00-06-14.png)
+![Screenshot from 2019-06-16 00-06-14](README.assets/Screenshot from 2019-06-16 00-06-14.png)
 
 Notice that `zygote` is the parent process of  `calculator`, they shared many things to for speed up reason. 
 
@@ -953,7 +953,7 @@ int main()
 And here is the output after running the benchmark program. 
 `INC = 1024` and `MY_THRE = 512`
 
-![](report.assets/Screenshot from 2019-06-18 11-37-35 - 1.png)
+![](README.assets/Screenshot from 2019-06-18 11-37-35 - 1.png)
 
 ## Discussion
 
